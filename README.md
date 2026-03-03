@@ -198,15 +198,6 @@ ECS includes sections specifically designed for large enterprise needs:
 | **Cognitive Load Budget** | Respect team capacity | `overloaded_teams: [Platform, Payments]` |
 | **Definition of Done** | Meet quality standards | `security_scan: required, accessibility: WCAG 2.1 AA` |
 
-### Proof Points
-
-Organizations using structured context see:
-
-- **40-60% reduction** in AI prompt engineering time
-- **3x faster** onboarding of new AI tools
-- **Significantly fewer** AI recommendations that violate constraints
-- **Better stakeholder trust** in AI-generated outputs
-
 ---
 
 ## The Problem
