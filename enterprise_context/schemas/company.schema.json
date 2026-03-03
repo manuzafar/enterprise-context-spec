@@ -1,0 +1,388 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enterprisecontext.dev/v1/company.schema.json",
+  "title": "Company Context",
+  "description": "Company-wide context for AI agents. Updated annually or after major strategy changes.",
+  "type": "object",
+  "required": ["company", "industry"],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "enterprise-context/v1/company",
+      "description": "Schema identifier"
+    },
+    "company": {
+      "type": "string",
+      "description": "Legal company name"
+    },
+    "industry": {
+      "type": "string",
+      "description": "Primary industry (e.g., Financial Services, Healthcare, Technology)"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Last update date (YYYY-MM-DD)"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Email or team responsible for maintaining this context"
+    },
+    "identity": {
+      "type": "object",
+      "description": "Company identity and structure",
+      "properties": {
+        "business_units": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of business units or divisions"
+        },
+        "size": {
+          "type": "object",
+          "properties": {
+            "employees": { "type": "integer" },
+            "revenue": { "type": "string" },
+            "customers": { "type": "string" }
+          }
+        },
+        "geography": {
+          "type": "string",
+          "description": "Geographic presence (e.g., National, Global, APAC)"
+        }
+      }
+    },
+    "strategy": {
+      "type": "object",
+      "description": "Strategic priorities and direction",
+      "properties": {
+        "current_strategy": {
+          "type": "string",
+          "description": "Current strategic focus (e.g., FY25: Digital-first, cost reduction)"
+        },
+        "okrs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "objective": { "type": "string" },
+              "key_results": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          },
+          "description": "Company-level OKRs"
+        },
+        "investment_themes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Where leadership is directing funding"
+        },
+        "strategic_constraints": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Strategic constraints (e.g., no acquisitions, headcount freeze)"
+        }
+      }
+    },
+    "business_capabilities": {
+      "type": "object",
+      "description": "Business capability map with maturity and investment priority (Enterprise Architecture)",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "maturity": {
+            "type": "string",
+            "enum": ["nascent", "emerging", "mature", "declining"],
+            "description": "Capability maturity level"
+          },
+          "investment_priority": {
+            "type": "string",
+            "enum": ["build", "grow", "optimize", "maintain", "sunset"],
+            "description": "Investment priority for this capability"
+          },
+          "description": {
+            "type": "string",
+            "description": "Brief description of the capability"
+          }
+        }
+      }
+    },
+    "technology": {
+      "type": "object",
+      "description": "Technology landscape and constraints",
+      "properties": {
+        "core_systems": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Core enterprise systems (e.g., Guidewire, SAP, Salesforce)"
+        },
+        "cloud": {
+          "type": "string",
+          "enum": ["AWS", "Azure", "GCP", "Hybrid", "On-premises", "Multi-cloud"],
+          "description": "Primary cloud provider"
+        },
+        "platforms": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Key platforms (CRM, data warehouse, identity provider)"
+        },
+        "integration_approach": {
+          "type": "string",
+          "enum": ["API-first", "ESB", "Point-to-point", "Event-driven", "Hybrid"],
+          "description": "Primary integration pattern"
+        },
+        "technical_constraints": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Technical constraints and guardrails"
+        },
+        "tech_debt": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Known technical debt or legacy systems"
+        }
+      }
+    },
+    "data_architecture": {
+      "type": "object",
+      "description": "Enterprise data architecture (Enterprise Architecture)",
+      "properties": {
+        "golden_sources": {
+          "type": "object",
+          "description": "System of record for each data domain",
+          "additionalProperties": { "type": "string" }
+        },
+        "data_domains": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Core data domains (e.g., customer, policy, claims, finance)"
+        },
+        "data_governance": {
+          "type": "string",
+          "enum": ["centralized", "federated", "hybrid"],
+          "description": "Data governance model"
+        },
+        "data_platform": {
+          "type": "string",
+          "description": "Primary data/analytics platform (e.g., Snowflake, Databricks)"
+        },
+        "data_quality_standards": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Data quality standards and requirements"
+        }
+      }
+    },
+    "regulatory": {
+      "type": "object",
+      "description": "Regulatory and compliance posture",
+      "properties": {
+        "regulators": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Primary regulators (e.g., APRA, ASIC, FDA, SEC)"
+        },
+        "frameworks": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Compliance frameworks (e.g., SOC 2, ISO 27001, HIPAA)"
+        },
+        "compliance_stance": {
+          "type": "string",
+          "enum": ["conservative", "moderate", "progressive"],
+          "description": "How the organization approaches regulatory grey areas"
+        },
+        "data_sensitivity": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Types of sensitive data handled (PII, PHI, financial)"
+        },
+        "data_residency": {
+          "type": "string",
+          "description": "Data residency requirements (e.g., Australian data centres only)"
+        }
+      }
+    },
+    "risk_appetite": {
+      "type": "object",
+      "description": "Organisational risk appetite across dimensions (Organisational Design)",
+      "properties": {
+        "technology": {
+          "type": "string",
+          "enum": ["very_conservative", "conservative", "moderate", "progressive", "aggressive"],
+          "description": "Willingness to adopt new or emerging technology"
+        },
+        "market": {
+          "type": "string",
+          "enum": ["very_conservative", "conservative", "moderate", "progressive", "aggressive"],
+          "description": "Willingness to enter new markets or segments"
+        },
+        "regulatory": {
+          "type": "string",
+          "enum": ["very_conservative", "conservative", "moderate", "progressive", "aggressive"],
+          "description": "Approach to regulatory grey areas"
+        },
+        "innovation": {
+          "type": "string",
+          "enum": ["very_conservative", "conservative", "moderate", "progressive", "aggressive"],
+          "description": "Willingness to experiment and fail fast"
+        },
+        "operational": {
+          "type": "string",
+          "enum": ["very_conservative", "conservative", "moderate", "progressive", "aggressive"],
+          "description": "Tolerance for operational disruption during change"
+        }
+      }
+    },
+    "funding_model": {
+      "type": "object",
+      "description": "How initiatives are funded (Organisational Design)",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["project", "product", "hybrid"],
+          "description": "Primary funding model (project-based vs product-based)"
+        },
+        "budget_cycle": {
+          "type": "string",
+          "description": "Fiscal year or budget cycle (e.g., July-June, Calendar year)"
+        },
+        "capex_opex_preference": {
+          "type": "string",
+          "enum": ["capex", "opex", "balanced"],
+          "description": "Preference for capital vs operational expenditure"
+        },
+        "approval_thresholds": {
+          "type": "object",
+          "description": "Spending approval thresholds by role",
+          "additionalProperties": { "type": "string" }
+        },
+        "reallocation_flexibility": {
+          "type": "string",
+          "enum": ["none", "limited", "moderate", "high"],
+          "description": "Ability to reallocate budget mid-cycle"
+        }
+      }
+    },
+    "change_capacity": {
+      "type": "object",
+      "description": "Organisational capacity for change (Organisational Design)",
+      "properties": {
+        "major_initiatives_in_flight": {
+          "type": "integer",
+          "description": "Number of major change initiatives currently underway"
+        },
+        "change_fatigue": {
+          "type": "string",
+          "enum": ["low", "moderate", "high", "critical"],
+          "description": "Current level of organisational change fatigue"
+        },
+        "adoption_support": {
+          "type": "string",
+          "enum": ["none", "limited", "moderate", "strong"],
+          "description": "Available support for change adoption (training, comms, etc.)"
+        },
+        "transformation_programs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Major transformation programs in flight (e.g., Cloud Migration, Digital CX)"
+        },
+        "change_blackout_periods": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Periods when change is restricted (e.g., Q4 code freeze, end of financial year)"
+        }
+      }
+    },
+    "organization": {
+      "type": "object",
+      "description": "Organizational structure and governance",
+      "properties": {
+        "executive_sponsors": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Typical executive sponsor roles for initiatives"
+        },
+        "product_leadership": {
+          "type": "string",
+          "description": "How product management is structured"
+        },
+        "delivery_model": {
+          "type": "string",
+          "enum": ["Agile", "SAFe", "Scrum", "Kanban", "Waterfall", "Hybrid"],
+          "description": "Primary delivery methodology"
+        },
+        "decision_forums": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Key decision-making forums"
+        },
+        "gate_approvers": {
+          "type": "object",
+          "description": "Who approves at each stage gate",
+          "additionalProperties": { "type": "string" }
+        }
+      }
+    },
+    "architecture_principles": {
+      "type": "array",
+      "description": "Enterprise architecture principles that guide design decisions (Enterprise Architecture)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Principle name"
+          },
+          "statement": {
+            "type": "string",
+            "description": "Principle statement"
+          },
+          "rationale": {
+            "type": "string",
+            "description": "Why this principle exists"
+          },
+          "implications": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "What this means for design decisions"
+          }
+        }
+      }
+    },
+    "competition": {
+      "type": "object",
+      "description": "Competitive landscape",
+      "properties": {
+        "primary_competitors": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Main competitors"
+        },
+        "disruptors": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Emerging disruptors or new entrants"
+        },
+        "differentiators": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "What sets your company apart"
+        },
+        "market_position": {
+          "type": "string",
+          "description": "Market position (e.g., #3 by revenue, market leader in segment)"
+        }
+      }
+    },
+    "ubiquitous_language": {
+      "type": "object",
+      "description": "Domain-Driven Design ubiquitous language - consistent terminology across the organisation",
+      "additionalProperties": {
+        "type": "string",
+        "description": "Definition of the term"
+      }
+    }
+  }
+}

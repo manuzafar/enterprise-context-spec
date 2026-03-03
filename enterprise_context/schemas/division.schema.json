@@ -1,0 +1,449 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enterprisecontext.dev/v1/division.schema.json",
+  "title": "Division Context",
+  "description": "Division/business unit context. Extends company context. Updated quarterly.",
+  "type": "object",
+  "required": ["division"],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "enterprise-context/v1/division",
+      "description": "Schema identifier"
+    },
+    "division": {
+      "type": "string",
+      "description": "Division or business unit name"
+    },
+    "business_unit": {
+      "type": "string",
+      "description": "Parent business unit if applicable"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Last update date (YYYY-MM-DD)"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Email or person responsible for maintaining this context"
+    },
+    "identity": {
+      "type": "object",
+      "properties": {
+        "head": {
+          "type": "string",
+          "description": "Division head name and title"
+        },
+        "size": {
+          "type": "object",
+          "properties": {
+            "employees": { "type": "integer" },
+            "teams": { "type": "integer" }
+          }
+        },
+        "purpose": {
+          "type": "string",
+          "description": "Division mission or purpose"
+        }
+      }
+    },
+    "strategy": {
+      "type": "object",
+      "properties": {
+        "division_okrs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "objective": { "type": "string" },
+              "key_results": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          },
+          "description": "Division-specific OKRs (extends company OKRs)"
+        },
+        "priorities": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Current division priorities"
+        },
+        "constraints": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Division-specific constraints"
+        }
+      }
+    },
+    "domain_classification": {
+      "type": "object",
+      "description": "Domain-Driven Design classification of the division's domain",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["core", "supporting", "generic"],
+          "description": "Domain type: core (competitive advantage), supporting (necessary but not differentiating), generic (commodity/COTS)"
+        },
+        "rationale": {
+          "type": "string",
+          "description": "Why this domain is classified this way"
+        },
+        "bounded_contexts": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Bounded contexts within this division"
+        },
+        "subdomain_focus": {
+          "type": "string",
+          "description": "Primary subdomain focus area"
+        }
+      }
+    },
+    "context_map": {
+      "type": "object",
+      "description": "Domain-Driven Design context map showing relationships with other contexts",
+      "properties": {
+        "upstream": {
+          "type": "array",
+          "description": "Contexts this division depends on",
+          "items": {
+            "type": "object",
+            "properties": {
+              "context": {
+                "type": "string",
+                "description": "Name of the upstream context"
+              },
+              "relationship": {
+                "type": "string",
+                "enum": ["customer-supplier", "conformist", "anticorruption-layer", "open-host-service", "published-language"],
+                "description": "Type of relationship with upstream"
+              },
+              "integration": {
+                "type": "string",
+                "enum": ["API", "events", "shared-database", "batch", "file"],
+                "description": "Integration mechanism"
+              },
+              "owner": {
+                "type": "string",
+                "description": "Team or division that owns the upstream context"
+              }
+            }
+          }
+        },
+        "downstream": {
+          "type": "array",
+          "description": "Contexts that depend on this division",
+          "items": {
+            "type": "object",
+            "properties": {
+              "context": {
+                "type": "string",
+                "description": "Name of the downstream context"
+              },
+              "relationship": {
+                "type": "string",
+                "enum": ["customer-supplier", "conformist", "anticorruption-layer", "open-host-service", "published-language"],
+                "description": "Type of relationship with downstream"
+              },
+              "integration": {
+                "type": "string",
+                "enum": ["API", "events", "shared-database", "batch", "file"],
+                "description": "Integration mechanism"
+              },
+              "consumer": {
+                "type": "string",
+                "description": "Team or division that consumes this context"
+              }
+            }
+          }
+        },
+        "shared_kernel": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Contexts with shared kernel relationship (shared model)"
+        },
+        "partnership": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Contexts with partnership relationship (mutual coordination)"
+        }
+      }
+    },
+    "team_topology": {
+      "type": "object",
+      "description": "Team Topologies structure within the division",
+      "properties": {
+        "stream_aligned": {
+          "type": "array",
+          "description": "Stream-aligned teams (aligned to flow of work)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "focus": { "type": "string" },
+              "value_stream": { "type": "string" }
+            }
+          }
+        },
+        "platform": {
+          "type": "array",
+          "description": "Platform teams (enable stream-aligned teams)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "focus": { "type": "string" },
+              "services_provided": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        },
+        "enabling": {
+          "type": "array",
+          "description": "Enabling teams (help other teams adopt new capabilities)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "focus": { "type": "string" },
+              "capabilities_enabled": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        },
+        "complicated_subsystem": {
+          "type": "array",
+          "description": "Complicated subsystem teams (specialist knowledge required)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "focus": { "type": "string" },
+              "specialist_domain": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "cognitive_load_budget": {
+      "type": "object",
+      "description": "Team Topologies cognitive load assessment at division level",
+      "properties": {
+        "total_teams": {
+          "type": "integer",
+          "description": "Total number of teams in division"
+        },
+        "total_services_owned": {
+          "type": "integer",
+          "description": "Total services/systems owned by division"
+        },
+        "average_services_per_team": {
+          "type": "number",
+          "description": "Average services per team (target: 2-3)"
+        },
+        "overloaded_teams": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Teams identified as cognitively overloaded"
+        },
+        "capacity_for_new_work": {
+          "type": "string",
+          "enum": ["none", "limited", "moderate", "high"],
+          "description": "Division capacity for taking on new initiatives"
+        },
+        "load_reduction_initiatives": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Initiatives to reduce cognitive load (e.g., platform investment, team split)"
+        }
+      }
+    },
+    "technology": {
+      "type": "object",
+      "properties": {
+        "core_systems": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Division-specific systems (extends company systems)"
+        },
+        "integrations": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Key integration points"
+        },
+        "tech_stack": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Division tech stack (extends company stack)"
+        }
+      }
+    },
+    "data_ownership": {
+      "type": "object",
+      "description": "Data domains owned and consumed by this division (Enterprise Architecture)",
+      "properties": {
+        "owns": {
+          "type": "array",
+          "description": "Data domains this division is the owner/steward of",
+          "items": {
+            "type": "object",
+            "properties": {
+              "domain": {
+                "type": "string",
+                "description": "Data domain name"
+              },
+              "system_of_record": {
+                "type": "string",
+                "description": "System of record for this domain"
+              },
+              "data_steward": {
+                "type": "string",
+                "description": "Person responsible for data quality"
+              },
+              "sensitivity": {
+                "type": "string",
+                "enum": ["public", "internal", "confidential", "restricted"],
+                "description": "Data sensitivity classification"
+              }
+            }
+          }
+        },
+        "consumes": {
+          "type": "array",
+          "description": "Data domains this division consumes from other owners",
+          "items": {
+            "type": "object",
+            "properties": {
+              "domain": {
+                "type": "string",
+                "description": "Data domain name"
+              },
+              "source_system": {
+                "type": "string",
+                "description": "System data is consumed from"
+              },
+              "owner": {
+                "type": "string",
+                "description": "Division/team that owns this data"
+              },
+              "refresh_frequency": {
+                "type": "string",
+                "description": "How often data is refreshed (real-time, hourly, daily, etc.)"
+              }
+            }
+          }
+        }
+      }
+    },
+    "architecture_decisions": {
+      "type": "array",
+      "description": "Key Architecture Decision Records (ADRs) for this division (Enterprise Architecture)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ADR identifier (e.g., ADR-001)"
+          },
+          "title": {
+            "type": "string",
+            "description": "Decision title"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["proposed", "accepted", "deprecated", "superseded"],
+            "description": "Decision status"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date decision was made"
+          },
+          "context": {
+            "type": "string",
+            "description": "Context and problem statement"
+          },
+          "decision": {
+            "type": "string",
+            "description": "The decision that was made"
+          },
+          "consequences": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Consequences of this decision"
+          }
+        }
+      }
+    },
+    "regulatory": {
+      "type": "object",
+      "properties": {
+        "additional_frameworks": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Division-specific regulatory frameworks"
+        },
+        "data_sensitivity": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Division-specific data types"
+        },
+        "compliance_requirements": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Specific compliance requirements"
+        }
+      }
+    },
+    "stakeholders": {
+      "type": "object",
+      "properties": {
+        "executive_sponsor": {
+          "type": "string",
+          "description": "Division executive sponsor (name and title)"
+        },
+        "decision_forum": {
+          "type": "string",
+          "description": "Primary decision-making forum"
+        },
+        "gate_approver": {
+          "type": "string",
+          "description": "Who approves initiatives at gate reviews"
+        },
+        "key_stakeholders": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "role": { "type": "string" },
+              "interest": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "kpis": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "metric": { "type": "string" },
+              "current": { "type": "string" },
+              "target": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

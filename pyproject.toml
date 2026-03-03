@@ -1,0 +1,83 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "enterprise-context"
+version = "0.1.0"
+description = "An open standard for organizational context that AI agents can consume"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+    { name = "Enterprise Context Spec Contributors" }
+]
+keywords = [
+    "ai",
+    "agents",
+    "enterprise",
+    "context",
+    "llm",
+    "organizational-knowledge",
+    "agentic-ai",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "pyyaml>=6.0",
+    "jsonschema>=4.0",
+    "click>=8.0",
+]
+
+[project.optional-dependencies]
+a2a = [
+    "fastapi>=0.100",
+    "uvicorn>=0.20",
+    "pydantic>=2.0",
+]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+ec = "enterprise_context.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/enterprise-context/enterprise-context-spec"
+Documentation = "https://github.com/enterprise-context/enterprise-context-spec#readme"
+Repository = "https://github.com/enterprise-context/enterprise-context-spec"
+Issues = "https://github.com/enterprise-context/enterprise-context-spec/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["enterprise_context"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "enterprise_context/**/*",
+    "README.md",
+    "LICENSE",
+    "pyproject.toml",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"

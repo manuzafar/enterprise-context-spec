@@ -1,0 +1,425 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enterprisecontext.dev/v1/team.schema.json",
+  "title": "Team Context",
+  "description": "Team-level context. Extends division context. Updated as needed.",
+  "type": "object",
+  "required": ["team"],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "enterprise-context/v1/team",
+      "description": "Schema identifier"
+    },
+    "team": {
+      "type": "string",
+      "description": "Team name"
+    },
+    "product_area": {
+      "type": "string",
+      "description": "Product or domain the team owns"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date",
+      "description": "Last update date (YYYY-MM-DD)"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Product Manager or Team Lead email"
+    },
+    "identity": {
+      "type": "object",
+      "properties": {
+        "pm": {
+          "type": "string",
+          "description": "Product Manager name"
+        },
+        "tech_lead": {
+          "type": "string",
+          "description": "Technical Lead name"
+        },
+        "size": {
+          "type": "integer",
+          "description": "Team size"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["stream-aligned", "platform", "enabling", "complicated-subsystem"],
+          "description": "Team type (Team Topologies)"
+        },
+        "value_stream": {
+          "type": "string",
+          "description": "Value stream this team is aligned to (for stream-aligned teams)"
+        }
+      }
+    },
+    "team_interactions": {
+      "type": "object",
+      "description": "Team Topologies interaction modes with other teams",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": ["collaboration", "x-as-a-service", "facilitating"],
+            "description": "Interaction mode: collaboration (working closely together), x-as-a-service (consuming their service), facilitating (they help us adopt capabilities)"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the interaction"
+          },
+          "duration": {
+            "type": "string",
+            "enum": ["temporary", "ongoing"],
+            "description": "Whether this interaction is temporary (e.g., during adoption) or ongoing"
+          },
+          "contact": {
+            "type": "string",
+            "description": "Primary contact for this team"
+          }
+        }
+      }
+    },
+    "api_ownership": {
+      "type": "object",
+      "description": "APIs and services this team owns vs consumes (Team Topologies boundaries)",
+      "properties": {
+        "owns": {
+          "type": "array",
+          "description": "APIs/services this team owns and is responsible for",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "API or service name"
+              },
+              "type": {
+                "type": "string",
+                "enum": ["REST", "GraphQL", "gRPC", "event", "batch", "UI"],
+                "description": "API/service type"
+              },
+              "consumers": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Teams/systems that consume this API"
+              },
+              "sla": {
+                "type": "string",
+                "description": "SLA for this service (e.g., 99.9% uptime)"
+              }
+            }
+          }
+        },
+        "consumes": {
+          "type": "array",
+          "description": "APIs/services this team consumes from other teams",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "API or service name"
+              },
+              "provider": {
+                "type": "string",
+                "description": "Team that provides this API"
+              },
+              "criticality": {
+                "type": "string",
+                "enum": ["critical", "important", "nice-to-have"],
+                "description": "How critical this dependency is"
+              },
+              "fallback": {
+                "type": "string",
+                "description": "What happens if this service is unavailable"
+              }
+            }
+          }
+        }
+      }
+    },
+    "cognitive_load": {
+      "type": "object",
+      "description": "Team Topologies cognitive load assessment",
+      "properties": {
+        "current_velocity": {
+          "type": "string",
+          "description": "Current velocity (e.g., 32 points/sprint)"
+        },
+        "services_owned": {
+          "type": "integer",
+          "description": "Number of services/systems this team owns"
+        },
+        "tech_debt_allocation": {
+          "type": "string",
+          "description": "Percentage of capacity allocated to tech debt (e.g., 20%)"
+        },
+        "on_call_burden": {
+          "type": "string",
+          "description": "On-call load (e.g., 1 person/week, 2 incidents/week average)"
+        },
+        "meeting_load": {
+          "type": "string",
+          "enum": ["low", "moderate", "high", "excessive"],
+          "description": "Meeting overhead"
+        },
+        "spare_capacity": {
+          "type": "string",
+          "enum": ["none", "low", "moderate", "high"],
+          "description": "Available capacity for new work"
+        },
+        "domain_complexity": {
+          "type": "string",
+          "enum": ["low", "moderate", "high", "very-high"],
+          "description": "Complexity of the domain this team works in"
+        },
+        "load_concerns": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Specific concerns about team load or capacity"
+        }
+      }
+    },
+    "current_state": {
+      "type": "object",
+      "description": "Current state of the product/system",
+      "properties": {
+        "existing_solution": {
+          "type": "string",
+          "description": "Current solution description"
+        },
+        "known_issues": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Known problems with current state"
+        },
+        "metrics": {
+          "type": "object",
+          "additionalProperties": { "type": "string" },
+          "description": "Current metrics (e.g., NPS: -12, abandonment: 47%)"
+        },
+        "previous_attempts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "initiative": { "type": "string" },
+              "year": { "type": "integer" },
+              "outcome": { "type": "string" },
+              "learnings": { "type": "string" }
+            }
+          },
+          "description": "Previous attempts to solve this problem"
+        }
+      }
+    },
+    "domain_events": {
+      "type": "object",
+      "description": "Domain-Driven Design events this team produces and consumes",
+      "properties": {
+        "produces": {
+          "type": "array",
+          "description": "Domain events this team publishes",
+          "items": {
+            "type": "object",
+            "properties": {
+              "event": {
+                "type": "string",
+                "description": "Event name (e.g., ClaimLodged, PaymentProcessed)"
+              },
+              "description": {
+                "type": "string",
+                "description": "What this event represents"
+              },
+              "consumers": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Teams/systems that consume this event"
+              },
+              "schema_location": {
+                "type": "string",
+                "description": "Where the event schema is documented"
+              }
+            }
+          }
+        },
+        "consumes": {
+          "type": "array",
+          "description": "Domain events this team subscribes to",
+          "items": {
+            "type": "object",
+            "properties": {
+              "event": {
+                "type": "string",
+                "description": "Event name"
+              },
+              "producer": {
+                "type": "string",
+                "description": "Team that produces this event"
+              },
+              "usage": {
+                "type": "string",
+                "description": "How this team uses this event"
+              }
+            }
+          }
+        }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "properties": {
+        "technical": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Technical constraints"
+        },
+        "timeline": {
+          "type": "string",
+          "description": "Timeline constraints"
+        },
+        "budget": {
+          "type": "string",
+          "description": "Budget constraints"
+        },
+        "dependencies": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "External dependencies"
+        }
+      }
+    },
+    "definition_of_done": {
+      "type": "object",
+      "description": "Team's Definition of Done criteria (Organisational Design)",
+      "properties": {
+        "story_level": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Criteria for a story to be considered done"
+        },
+        "feature_level": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Criteria for a feature to be considered done"
+        },
+        "release_level": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Criteria for a release to be considered done"
+        },
+        "quality_gates": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Quality gates that must be passed"
+        }
+      }
+    },
+    "stakeholders": {
+      "type": "object",
+      "properties": {
+        "immediate": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "role": { "type": "string" },
+              "interest": { "type": "string" }
+            }
+          },
+          "description": "Immediate stakeholders"
+        },
+        "impacted_teams": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "team": { "type": "string" },
+              "impact": { "type": "string" },
+              "size": { "type": "integer" }
+            }
+          },
+          "description": "Teams impacted by this team's work"
+        }
+      }
+    },
+    "success_metrics_ownership": {
+      "type": "object",
+      "description": "Metrics this team owns vs influences (Organisational Design)",
+      "properties": {
+        "owns": {
+          "type": "array",
+          "description": "Metrics this team is directly accountable for",
+          "items": {
+            "type": "object",
+            "properties": {
+              "metric": {
+                "type": "string",
+                "description": "Metric name"
+              },
+              "current": {
+                "type": "string",
+                "description": "Current value"
+              },
+              "target": {
+                "type": "string",
+                "description": "Target value"
+              },
+              "measurement": {
+                "type": "string",
+                "description": "How this metric is measured"
+              }
+            }
+          }
+        },
+        "influences": {
+          "type": "array",
+          "description": "Metrics this team contributes to but doesn't fully own",
+          "items": {
+            "type": "object",
+            "properties": {
+              "metric": {
+                "type": "string",
+                "description": "Metric name"
+              },
+              "contribution": {
+                "type": "string",
+                "description": "How this team contributes to this metric"
+              },
+              "owner": {
+                "type": "string",
+                "description": "Team/person that owns this metric"
+              }
+            }
+          }
+        }
+      }
+    },
+    "users": {
+      "type": "object",
+      "properties": {
+        "primary": {
+          "type": "string",
+          "description": "Primary user segment"
+        },
+        "secondary": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Secondary user segments"
+        },
+        "pain_points": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Known user pain points"
+        },
+        "sophistication": {
+          "type": "string",
+          "description": "User technical sophistication"
+        }
+      }
+    }
+  }
+}

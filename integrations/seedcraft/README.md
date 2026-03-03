@@ -1,101 +1,93 @@
 # Seedcraft Integration
 
-This guide explains how to use Enterprise Context Spec files with [Seedcraft](https://github.com/...), the AI-powered product discovery system.
+> **Coming Soon** — Direct SDK integration is planned but not yet implemented. Track progress in [Issue #2](https://github.com/enterprise-context/enterprise-context-spec/issues/2).
 
-## Overview
+This document describes how Enterprise Context Spec files work with [Seedcraft](https://github.com/seedcraft-ai/seedcraft), the AI-powered product discovery system.
 
-Seedcraft generates comprehensive inception packs for product ideas. With enterprise context, Seedcraft can:
+## Current Status
 
-- Align recommendations with your company strategy
-- Design for your actual tech stack
-- Consider your regulatory requirements
-- Reference real stakeholders and decision forums
-- Avoid suggesting approaches that failed before
+Seedcraft can consume Enterprise Context files, but the dedicated SDK integration shown in the examples below is not yet available.
 
-## Usage
+## How to Use Today
 
-### Option 1: File Upload (UI)
+### Option 1: Manual Context (Recommended)
 
-1. Navigate to Seedcraft input form
-2. Upload your context files:
-   - `company-context.md` (required)
-   - `division-context.md` (optional)
-   - `team-context.md` (optional)
-3. Enter your product idea
-4. Generate inception pack
+Copy your context into Seedcraft's "Additional Context" field:
 
-### Option 2: API
+1. Merge your context files using the CLI:
+   ```bash
+   ec merge company.md division.md team.md -o merged.json
+   ```
+
+2. Copy the merged context into Seedcraft's input form
+
+### Option 2: API (Direct JSON)
 
 ```python
 import requests
+from enterprise_context import load_context, merge_contexts
 
+# Load and merge contexts
+company = load_context("company-context.md")
+division = load_context("division-context.md")
+context = merge_contexts(company, division)
+
+# Include in API request
 response = requests.post(
     "https://api.seedcraft.dev/api/discovery/start",
     json={
         "product_idea": "AI-powered claims triage",
-        "context_files": {
-            "company": open("company-context.md").read(),
-            "division": open("claims-division-context.md").read(),
-            "team": open("lodgement-team-context.md").read()
-        }
+        "additional_context": context  # Pass merged context
     }
 )
 ```
 
-### Option 3: Python SDK
+## How Context Improves Outputs
+
+When Seedcraft has enterprise context, its agents can:
+
+| Agent | Uses Context For |
+|-------|------------------|
+| **Planner** | Strategy alignment, investment themes |
+| **Customer Research** | Industry, competitors, market position |
+| **Business Strategy** | OKRs, funding model, risk appetite |
+| **Technical Architect** | Tech stack, integration patterns, constraints |
+| **Legal & Regulatory** | Compliance frameworks, data residency |
+| **GTM Strategy** | Competitive differentiators, market position |
+| **Critique** | Strategic alignment validation |
+
+## Example
+
+**Without context:**
+> "Consider integrating with a CRM system..."
+
+**With context:**
+> "Integrate with the existing Salesforce CRM via Azure API Management, following the API-first pattern. Given the conservative compliance stance, ensure regulatory requirements are met for any new data flows."
+
+## Planned SDK Usage
+
+When the SDK integration is implemented:
 
 ```python
+# This will work when the SDK is available
 from seedcraft import DiscoverySession
 
 session = DiscoverySession(
     product_idea="AI-powered claims triage for motor insurance",
     context_files=[
         "company-context.md",
-        "claims-division-context.md",
-        "lodgement-team-context.md"
+        "division-context.md",
+        "team-context.md"
     ]
 )
 
 pack = await session.generate()
 ```
 
-## How Context is Used
+## Contributing
 
-### Agent: Planner
-Uses company strategy and investment themes to assess domain fit.
+Want to help implement this integration? See [CONTRIBUTING.md](../../CONTRIBUTING.md) for guidelines.
 
-### Agent: Customer Research
-Uses industry, competitors, and market position for research grounding.
+## License
 
-### Agent: Business Strategy
-Aligns Lean Canvas and value proposition with company OKRs.
-
-### Agent: Technical Architect
-Designs for actual tech stack, integration patterns, and constraints.
-
-### Agent: Legal & Regulatory
-Uses regulatory frameworks, compliance stance, and data residency requirements.
-
-### Agent: GTM Strategy
-Considers competitive differentiators and market position.
-
-### Agent: Stakeholder Views
-Generates briefings for actual exec sponsors and decision forums.
-
-### Agent: Critique
-Checks strategic alignment against real OKRs and constraints.
-
-## Example
-
-Without context:
-> "Consider integrating with a CRM system..."
-
-With context:
-> "Integrate with the existing Salesforce CRM via Azure API Management, following the API-first pattern established by the Platform team. Given the conservative compliance stance, ensure APRA CPS 234 requirements are met for any new data flows."
-
-## Best Practices
-
-1. **Start with company context** — Even minimal context improves outputs
-2. **Add division for domain-specific work** — Claims initiatives benefit from claims context
-3. **Add team for implementation planning** — Constraints and dependencies matter for PRDs
-4. **Keep context current** — Outdated OKRs produce misaligned recommendations
+MIT License

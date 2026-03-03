@@ -241,11 +241,21 @@ updated: 2025-03-01
 ...
 ```
 
-### 3. Use with any compatible agent
+### 3. Use with any AI agent
 
-- **Seedcraft** — AI-powered product discovery
-- **Your custom agents** — Via the Python loader
-- **LangChain / LlamaIndex** — Via integrations
+```python
+from enterprise_context import load_context, merge_contexts
+
+# Load and merge your context
+context = merge_contexts(
+    load_context("company-context.md"),
+    load_context("division-context.md")
+)
+
+# Include in your agent prompts
+```
+
+Works with any AI framework — LangChain, LlamaIndex, custom agents, or raw API calls.
 
 ## Why Use This?
 
@@ -298,10 +308,14 @@ enterprise-context-spec/
 │   ├── division-context.md     # Division template with guidance
 │   └── team-context.md         # Team template with guidance
 ├── examples/                   # Industry examples
-│   ├── enterprise/             # Generic enterprise (Financial Services)
+│   ├── enterprise/             # Financial Services (Banking)
 │   │   ├── company-context.md
 │   │   ├── operations-division-context.md
 │   │   └── customer-portal-team-context.md
+│   ├── insurance/              # General Insurance (Claims)
+│   │   ├── company-context.md
+│   │   ├── claims-division-context.md
+│   │   └── motor-claims-team-context.md
 │   ├── fintech/
 │   └── saas/
 ├── tools/                      # CLI tools
@@ -318,7 +332,13 @@ enterprise-context-spec/
 ## Installation
 
 ```bash
+# Install from PyPI (when published)
 pip install enterprise-context
+
+# Or install from source
+git clone https://github.com/enterprise-context/enterprise-context-spec.git
+cd enterprise-context-spec
+pip install -e .
 ```
 
 Or just copy the templates — no installation required for basic use.
@@ -337,6 +357,22 @@ ec convert company-context.md -o company-context.yaml
 ```
 
 ## Integrations
+
+### Python Package (Core)
+
+```python
+from enterprise_context import load_context, merge_contexts
+
+# Load context files
+company = load_context("company-context.md")
+division = load_context("division-context.md")
+team = load_context("team-context.md")
+
+# Merge with inheritance (company <- division <- team)
+context = merge_contexts(company, division, team)
+
+# Use context in your agent prompts
+```
 
 ### Google A2A (Agent-to-Agent)
 
@@ -367,48 +403,13 @@ response = await client.send_task({
 
 See [integrations/a2a/README.md](integrations/a2a/README.md) for full documentation.
 
-### Seedcraft
+### LangChain (Coming Soon)
 
-```python
-from seedcraft import DiscoverySession
+> **Note:** Direct LangChain integration is planned. See [integrations/langchain/README.md](integrations/langchain/README.md) for current workarounds.
 
-session = DiscoverySession(
-    product_idea="AI-powered customer portal",
-    context_files=[
-        "company-context.md",
-        "operations-division-context.md"
-    ]
-)
-```
+### Seedcraft (Coming Soon)
 
-### LangChain
-
-```python
-from enterprise_context.langchain import EnterpriseContextLoader
-
-loader = EnterpriseContextLoader([
-    "company-context.md",
-    "division-context.md"
-])
-docs = loader.load()
-
-# Use in RAG pipeline or agent
-```
-
-See [integrations/langchain/README.md](integrations/langchain/README.md) for full documentation.
-
-### Custom Agents
-
-```python
-from enterprise_context import load_context, merge_contexts
-
-company = load_context("company-context.md")
-division = load_context("division-context.md")
-team = load_context("team-context.md")
-
-context = merge_contexts(company, division, team)
-# Use context in your agent prompts
-```
+> **Note:** Direct Seedcraft SDK integration is planned. See [integrations/seedcraft/README.md](integrations/seedcraft/README.md) for current workarounds.
 
 ## Comparison Matrix
 
@@ -493,7 +494,11 @@ MIT License — see [LICENSE](LICENSE)
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-org/enterprise-context-spec.git
+git clone https://github.com/enterprise-context/enterprise-context-spec.git
+cd enterprise-context-spec
+
+# Install the package
+pip install -e .
 
 # Copy templates to your project
 cp templates/*.md ~/your-project/context/
@@ -502,7 +507,10 @@ cp templates/*.md ~/your-project/context/
 # Start with company-context.md, then add division and team as needed
 
 # Validate your context files
-python tools/validate.py context/*.md
+ec validate ~/your-project/context/*.md
+
+# Merge contexts for use with AI
+ec merge ~/your-project/context/*.md -o merged.json
 ```
 
 ---
