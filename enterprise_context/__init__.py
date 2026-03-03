@@ -4,7 +4,7 @@ Enterprise Context Spec - Organizational context for AI agents.
 An open standard for defining organizational context that AI agents can consume.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 from enterprise_context.loader import (
     load_context,
