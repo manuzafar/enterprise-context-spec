@@ -178,7 +178,7 @@ owner: "claims-product@protectorinsurance.com"
 
 ---
 
-## Regulatory
+## Regulatory & Compliance
 
 - **Additional Frameworks** (extends company):
   - General Insurance Code of Practice — claims handling timeframes
@@ -194,6 +194,62 @@ owner: "claims-product@protectorinsurance.com"
   - Acknowledge claims within 10 business days
   - Decision within 4 months (standard claims)
   - Monthly reporting to regulator on claims handling
+
+### Compliance Status
+
+- **Next Audit Date**: 2025-06-15
+- **Compliance Contacts**: claims-compliance@protectorinsurance.com
+
+**Open Audit Findings**:
+
+| Finding ID | Severity | Description | Due Date | Owner | Status |
+|------------|----------|-------------|----------|-------|--------|
+| AF-2024-018 | high | Claims decision audit trail incomplete for automated decisions | 2025-03-31 | Claims Platform Lead | in_progress |
+| AF-2024-022 | medium | Medical record access logging gaps | 2025-05-15 | Claims Data Team | open |
+
+---
+
+## Risk Management
+
+- **Risk Owner**: David Chen, Claims Operations Director
+
+### Division Risks
+
+| Risk ID | Category | Description | Likelihood | Impact | Owner | Controls |
+|---------|----------|-------------|------------|--------|-------|----------|
+| DR-001 | operational | CAT event overwhelming claims capacity | likely | major | Operations Director | Surge capacity plan, contractor pool, automation |
+| DR-002 | technology | ClaimCenter outage during peak | possible | catastrophic | Claims Platform Lead | Failover, manual backup processes |
+| DR-003 | compliance | Breach of claims handling timeframes | possible | major | Compliance Manager | Automated alerts, escalation process |
+| DR-004 | financial | Adverse development on motor claims | possible | moderate | Chief Actuary | Reserve monitoring, reinsurance |
+
+### Key Risk Indicators (KRIs)
+
+| Indicator | Threshold | Current | Status |
+|-----------|-----------|---------|--------|
+| Claims backlog > 10 days | > 500 claims | 285 claims | green |
+| Assessor utilisation | > 95% | 82% | green |
+| ClaimCenter availability | < 99.5% | 99.8% | green |
+| IDR complaint response time | > 30 days avg | 18 days | green |
+| CAT claims surge indicator | > 2x normal | 1.1x | green |
+
+---
+
+## Third-Party Risk
+
+### Critical Vendors
+
+| Vendor | Service | Criticality | Contract Owner | Contract End | SLA Performance |
+|--------|---------|-------------|----------------|--------------|-----------------|
+| Tractable | AI damage assessment | high | Claims AI Lead | 2026-06-30 | 99.7% uptime |
+| Shift Technology | Fraud detection | high | Fraud Team Lead | 2026-03-31 | 99.5% uptime |
+| Livegenic | Video assessment | medium | Assessment Lead | 2025-12-31 | 98.9% uptime |
+| Repairer Network | Motor repairs | critical | Supplier Manager | Various | 92% satisfaction |
+
+### Active Vendor Issues
+
+| Vendor | Issue | Severity | Status |
+|--------|-------|----------|--------|
+| Livegenic | Video quality degradation on mobile | low | in_progress |
 
 ---
 

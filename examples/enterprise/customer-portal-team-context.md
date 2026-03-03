@@ -273,6 +273,77 @@ The portal collects customer requests through a multi-step wizard with 35 form f
 
 ---
 
+## Team Compliance
+
+- **Compliance Checklist**:
+  - WCAG 2.1 AA accessibility (all customer-facing features)
+  - Privacy by design for new PII collection
+  - Customer consent capture for data processing
+  - Audit trail for submitted cases
+  - PCI-DSS (if handling payment information)
+
+- **Last Compliance Review**: 2024-10-20
+
+**Open Findings Assigned to Team**:
+
+| Finding ID | Description | Due Date | Status |
+|------------|-------------|----------|--------|
+| AF-2024-031 | Audit trail incomplete for automated case decisions | 2025-04-15 | in_progress |
+
+- **Evidence Requirements**:
+  - User consent records for data processing
+  - Case submission audit logs
+  - Session activity logs (90-day retention)
+  - Document upload records
+
+---
+
+## Risk Exposure
+
+### Service Risks
+
+| Service | Risk | Impact | Mitigations |
+|---------|------|--------|-------------|
+| portal-api | High traffic causing timeouts during peak | major | Auto-scaling, circuit breaker, fallback queue |
+| upload-service | Storage quota exceeded | moderate | Monitoring alerts, automated cleanup policy |
+| portal-ui | CDN failure affecting load times | moderate | Multi-region CDN, fallback to origin |
+
+### SLA Exposure
+
+- **SLA Target**: 99.9% uptime
+- **Current Performance**: 99.8%
+- **Recent Breaches**: 2024-11-15 (3-hour degradation due to upstream platform issue)
+- **Financial Exposure**: Reputational impact; indirect call centre cost increase
+
+### Known Vulnerabilities
+
+| System | Vulnerability | Severity | Remediation Plan |
+|--------|---------------|----------|------------------|
+| upload-service | Outdated dependencies (2 high-severity CVEs) | high | Scheduled upgrade Q2 2025 |
+| legacy portal | Multiple security findings from pen test | medium | Will be decommissioned after new portal launch |
+
+---
+
+## Third-Party Dependencies
+
+### Team Vendor Dependencies
+
+| Vendor | Service | Criticality | SLA | Support Contact |
+|--------|---------|-------------|-----|-----------------|
+| Address Lookup Provider | Address verification API | medium | 99.9% uptime | support@addressprovider.com |
+| CDN Provider | Static asset delivery | high | 99.95% uptime | support@cdn.com |
+| Analytics Provider | User analytics | low | 99.5% uptime | support@analytics.com |
+
+### Fallback Options
+
+| Vendor | Fallback Approach |
+|--------|-------------------|
+| Address Lookup | Manual address entry by customer |
+| CDN | Serve from origin (degraded performance) |
+| Analytics | Queue events locally, sync when restored |
+
+---
+
 ## Target Users
 
 - **Primary Users**: Customers submitting service requests (B2C)

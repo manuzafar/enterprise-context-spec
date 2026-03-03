@@ -91,9 +91,41 @@ owner: "strategy@acmecorp.com"
 - **Data Sensitivity**: PII (name, address, DOB, national ID), financial data (account numbers, transactions), credit data, authentication credentials
 - **Data Residency**: Local data centres only, no offshore processing of PII, cloud vendors must have local regions
 
+### Compliance Program
+
+- **Compliance Officers**:
+  - Chief Compliance Officer (CCO) - Dr. Robert Martinez
+  - Data Protection Officer (DPO) - Amanda Richardson
+  - Money Laundering Reporting Officer (MLRO) - David Okonkwo
+  - PCI-DSS Compliance Manager - Lisa Chen
+
+- **Audit Schedule**:
+  - External: Annual SOC 2 Type II, PCI-DSS quarterly scans, Biennial ISO 27001 recertification
+  - Internal: Quarterly compliance reviews, Annual control testing, Monthly AML sampling
+  - Regulatory: Central Bank examinations as scheduled
+
+- **Last External Audit**: 2024-08-20
+
+- **Active Certifications**:
+  - ISO 27001:2022 (expires 2026-03-15)
+  - SOC 2 Type II (annual attestation)
+  - PCI-DSS Level 1 (annual)
+
+- **Regulatory Reporting**:
+  - Central Bank monthly prudential returns
+  - Financial Conduct Authority annual report
+  - AML suspicious activity reports (as required)
+  - Privacy breach notification within 72 hours
+
 ---
 
-## Risk Appetite
+## Risk Management
+
+- **Risk Framework**: ISO 31000 with Basel framework for operational risk
+- **Risk Committee**: Board Risk Committee (quarterly), Enterprise Risk Committee (monthly), Technology Risk Committee (fortnightly)
+- **Risk Reporting**: Monthly to ExCo, Quarterly to Board Risk Committee, Real-time escalation for critical risks
+
+### Risk Appetite
 
 | Dimension | Appetite | Description |
 |-----------|----------|-------------|
@@ -102,6 +134,50 @@ owner: "strategy@acmecorp.com"
 | Regulatory | very_conservative | Always err on side of caution; engage regulators early on novel approaches |
 | Innovation | progressive | Encourage experimentation in non-critical areas; innovation lab active |
 | Operational | moderate | Accept some disruption for meaningful improvement; managed change |
+
+### Enterprise Risks
+
+| Risk ID | Category | Description | Likelihood | Impact | Owner | Treatment |
+|---------|----------|-------------|------------|--------|-------|-----------|
+| R-001 | technology | Core banking system outage | unlikely | catastrophic | CTO | mitigate |
+| R-002 | compliance | AML/KYC control failure | possible | major | MLRO | mitigate |
+| R-003 | operational | Fraud through digital channels | likely | moderate | Chief Risk Officer | mitigate |
+| R-004 | reputational | Data breach impacting customer trust | unlikely | catastrophic | CISO | mitigate |
+| R-005 | strategic | Fintech disruption of core products | possible | moderate | CDO | accept |
+| R-006 | financial | Credit loss in economic downturn | possible | major | Chief Credit Officer | transfer |
+
+---
+
+## Third-Party Risk Management
+
+- **Vendor Policy**: All vendors with access to customer data require security assessment
+- **Assessment Framework**: CAIQ (Consensus Assessment Initiative Questionnaire) for cloud, SIG for others
+- **Vendor Audit Schedule**: Critical: annual assessment + SOC 2 review, High: annual, Medium: biennial
+
+### Critical Vendors
+
+| Vendor | Service | Criticality | Data Access | Last Assessment | Contract End |
+|--------|---------|-------------|-------------|-----------------|--------------|
+| Core Banking Vendor | Core banking platform | critical | All account/transaction data | 2024-05-15 | 2028-12-31 |
+| Azure | Cloud infrastructure | critical | All data (encrypted) | 2024-06-01 | 2026-12-31 |
+| Salesforce | CRM | critical | Customer PII | 2024-07-20 | 2026-03-31 |
+| Okta | Identity provider | critical | Authentication credentials | 2024-04-10 | 2025-12-31 |
+| Snowflake | Data warehouse | high | Aggregated customer data | 2024-08-15 | 2026-06-30 |
+
+### Concentration Limits
+
+| Category | Limit | Current |
+|----------|-------|---------|
+| Single cloud provider | 80% of infrastructure | 75% (Azure) |
+| Single vendor per critical capability | Avoid where possible | Core banking is single vendor |
+| Country concentration for data processing | 100% local | Compliant |
+
+### Exit Requirements
+
+- All critical vendors must have 18-month exit clause
+- Data portability and format documentation required
+- Source code escrow for custom-developed components
+- Quarterly transition readiness testing for Tier 1 vendors
 
 ---
 

@@ -216,7 +216,7 @@ This document provides division-level context that extends the company context. 
 
 ---
 
-## Division Regulatory
+## Division Regulatory & Compliance
 
 - **Additional Frameworks**:
   - [e.g., General Insurance Code of Practice 2020 (claims handling timeframes)]
@@ -233,6 +233,70 @@ This document provides division-level context that extends the company context. 
   - [e.g., 10-year claim record retention]
   - [e.g., Audit trail for all claim decisions]
   - [e.g., 45-day complaint resolution requirement]
+
+### Compliance Status
+
+*Document open audit findings and compliance status. This helps AI understand current compliance risks.*
+
+- **Next Audit Date**: [e.g., 2025-03-15]
+- **Compliance Contacts**: [e.g., division-compliance@company.com]
+
+#### Open Audit Findings
+
+| Finding ID | Severity | Description | Due Date | Owner | Status |
+|------------|----------|-------------|----------|-------|--------|
+| [AF-2024-012] | [high] | [Incomplete audit trail for claim decisions] | [2025-02-28] | [James Wong] | [in_progress] |
+| [AF-2024-015] | [medium] | [Document retention policy not enforced] | [2025-04-30] | [Data Team] | [open] |
+
+**Severity**: critical, high, medium, low
+**Status**: open, in_progress, pending_validation, closed
+
+---
+
+## Division Risk Management
+
+*Document division-level risks and key risk indicators. This helps AI understand operational risks.*
+
+- **Risk Owner**: [e.g., Division Head or Risk Delegate]
+
+### Division Risks
+
+| Risk ID | Category | Description | Likelihood | Impact | Owner | Controls |
+|---------|----------|-------------|------------|--------|-------|----------|
+| [DR-001] | [operational] | [Claims processing delays due to assessor shortage] | [likely] | [moderate] | [Claims Ops Lead] | [Cross-training, contractor pool] |
+| [DR-002] | [technology] | [Legacy portal outage] | [possible] | [major] | [Tech Lead] | [Fallback to phone lodgement] |
+| [DR-003] | [compliance] | [AFCA complaint backlog] | [possible] | [moderate] | [Complaints Team] | [Weekly review, escalation process] |
+
+### Key Risk Indicators (KRIs)
+
+| Indicator | Threshold | Current | Status |
+|-----------|-----------|---------|--------|
+| [Claims backlog > 5 days] | [> 500 claims] | [320 claims] | [green] |
+| [Assessor utilisation] | [> 95%] | [88%] | [green] |
+| [System availability] | [< 99.5%] | [99.7%] | [green] |
+| [Complaint response time] | [> 30 days avg] | [28 days] | [amber] |
+
+**Status**: green (within tolerance), amber (approaching threshold), red (exceeded threshold)
+
+---
+
+## Division Third-Party Risk
+
+*Document vendors critical to this division. This helps AI understand vendor dependencies.*
+
+### Critical Vendors
+
+| Vendor | Service | Criticality | Contract Owner | Contract End | SLA Performance |
+|--------|---------|-------------|----------------|--------------|-----------------|
+| [Verisk] | [Repair estimating] | [critical] | [Operations Lead] | [2025-12-31] | [99.8% uptime] |
+| [Friss] | [Fraud detection] | [high] | [Fraud Team Lead] | [2026-06-30] | [99.5% uptime] |
+| [Symbility] | [Property assessment] | [medium] | [Home Claims Lead] | [2025-09-30] | [98.5% uptime] |
+
+### Active Vendor Issues
+
+| Vendor | Issue | Severity | Status |
+|--------|-------|----------|--------|
+| [Symbility] | [API rate limiting affecting peak load] | [medium] | [in_progress] |
 
 ---
 

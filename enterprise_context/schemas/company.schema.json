@@ -201,37 +201,193 @@
         "data_residency": {
           "type": "string",
           "description": "Data residency requirements (e.g., Australian data centres only)"
+        },
+        "compliance": {
+          "type": "object",
+          "description": "Compliance program details (GRC)",
+          "properties": {
+            "compliance_officers": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Key compliance officers (e.g., Chief Compliance Officer, Data Protection Officer)"
+            },
+            "audit_schedule": {
+              "type": "string",
+              "description": "Audit cadence (e.g., Annual SOC 2, Quarterly internal)"
+            },
+            "last_audit_date": {
+              "type": "string",
+              "format": "date",
+              "description": "Date of last external audit"
+            },
+            "certifications": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Active certifications (e.g., ISO 27001:2022, SOC 2 Type II)"
+            },
+            "regulatory_reporting": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Required regulatory reports (e.g., APRA quarterly returns, SEC 10-K)"
+            }
+          }
         }
       }
     },
-    "risk_appetite": {
+    "risk_management": {
       "type": "object",
-      "description": "Organisational risk appetite across dimensions (Organisational Design)",
+      "description": "Enterprise risk management framework and appetite (GRC)",
       "properties": {
-        "technology": {
+        "framework": {
           "type": "string",
-          "enum": ["very_conservative", "conservative", "moderate", "progressive", "aggressive"],
-          "description": "Willingness to adopt new or emerging technology"
+          "enum": ["COSO", "ISO 31000", "NIST RMF", "custom"],
+          "description": "Risk management framework used"
         },
-        "market": {
-          "type": "string",
-          "enum": ["very_conservative", "conservative", "moderate", "progressive", "aggressive"],
-          "description": "Willingness to enter new markets or segments"
+        "risk_appetite": {
+          "type": "object",
+          "description": "Risk appetite across dimensions",
+          "properties": {
+            "technology": {
+              "type": "string",
+              "enum": ["very_conservative", "conservative", "moderate", "progressive", "aggressive"],
+              "description": "Willingness to adopt new or emerging technology"
+            },
+            "market": {
+              "type": "string",
+              "enum": ["very_conservative", "conservative", "moderate", "progressive", "aggressive"],
+              "description": "Willingness to enter new markets or segments"
+            },
+            "regulatory": {
+              "type": "string",
+              "enum": ["very_conservative", "conservative", "moderate", "progressive", "aggressive"],
+              "description": "Approach to regulatory grey areas"
+            },
+            "innovation": {
+              "type": "string",
+              "enum": ["very_conservative", "conservative", "moderate", "progressive", "aggressive"],
+              "description": "Willingness to experiment and fail fast"
+            },
+            "operational": {
+              "type": "string",
+              "enum": ["very_conservative", "conservative", "moderate", "progressive", "aggressive"],
+              "description": "Tolerance for operational disruption during change"
+            }
+          }
         },
-        "regulatory": {
-          "type": "string",
-          "enum": ["very_conservative", "conservative", "moderate", "progressive", "aggressive"],
-          "description": "Approach to regulatory grey areas"
+        "enterprise_risks": {
+          "type": "array",
+          "description": "Top enterprise risks tracked at board level",
+          "items": {
+            "type": "object",
+            "properties": {
+              "risk_id": {
+                "type": "string",
+                "description": "Risk identifier (e.g., R-001)"
+              },
+              "category": {
+                "type": "string",
+                "enum": ["strategic", "operational", "financial", "compliance", "technology", "reputational"],
+                "description": "Risk category"
+              },
+              "description": {
+                "type": "string",
+                "description": "Risk description"
+              },
+              "likelihood": {
+                "type": "string",
+                "enum": ["rare", "unlikely", "possible", "likely", "almost_certain"],
+                "description": "Probability of occurrence"
+              },
+              "impact": {
+                "type": "string",
+                "enum": ["insignificant", "minor", "moderate", "major", "catastrophic"],
+                "description": "Impact if realized"
+              },
+              "owner": {
+                "type": "string",
+                "description": "Risk owner (executive or team)"
+              },
+              "treatment": {
+                "type": "string",
+                "enum": ["accept", "mitigate", "transfer", "avoid"],
+                "description": "Risk treatment strategy"
+              }
+            }
+          }
         },
-        "innovation": {
+        "risk_committee": {
           "type": "string",
-          "enum": ["very_conservative", "conservative", "moderate", "progressive", "aggressive"],
-          "description": "Willingness to experiment and fail fast"
+          "description": "Risk governance committee (e.g., Board Risk Committee, ERM Steering)"
         },
-        "operational": {
+        "risk_reporting_cadence": {
           "type": "string",
-          "enum": ["very_conservative", "conservative", "moderate", "progressive", "aggressive"],
-          "description": "Tolerance for operational disruption during change"
+          "description": "How often risk is reported to leadership (e.g., Monthly to ExCo, Quarterly to Board)"
+        }
+      }
+    },
+    "third_party_risk": {
+      "type": "object",
+      "description": "Third-party and vendor risk management (GRC)",
+      "properties": {
+        "vendor_policy": {
+          "type": "string",
+          "description": "Link to vendor management policy or summary"
+        },
+        "assessment_framework": {
+          "type": "string",
+          "enum": ["SIG", "CAIQ", "VSAQ", "custom"],
+          "description": "Vendor assessment framework used (SIG = Standardized Information Gathering, CAIQ = Consensus Assessment Initiative Questionnaire)"
+        },
+        "critical_vendors": {
+          "type": "array",
+          "description": "Critical/strategic vendors requiring enhanced oversight",
+          "items": {
+            "type": "object",
+            "properties": {
+              "vendor": {
+                "type": "string",
+                "description": "Vendor name"
+              },
+              "service": {
+                "type": "string",
+                "description": "Service provided"
+              },
+              "criticality": {
+                "type": "string",
+                "enum": ["critical", "high", "medium", "low"],
+                "description": "Business criticality"
+              },
+              "data_access": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Data types vendor can access (e.g., PII, financial)"
+              },
+              "last_assessment": {
+                "type": "string",
+                "format": "date",
+                "description": "Date of last risk assessment"
+              },
+              "contract_end": {
+                "type": "string",
+                "format": "date",
+                "description": "Contract end date"
+              }
+            }
+          }
+        },
+        "vendor_audit_schedule": {
+          "type": "string",
+          "description": "Audit cadence for vendors (e.g., Critical: annual, High: biennial)"
+        },
+        "concentration_limits": {
+          "type": "object",
+          "description": "Concentration risk limits",
+          "additionalProperties": { "type": "string" }
+        },
+        "exit_requirements": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Standard exit/transition requirements for critical vendors"
         }
       }
     },

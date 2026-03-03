@@ -258,6 +258,77 @@ e.g., 8-year-old claims lodgement portal built on legacy .NET stack. Handles ~2,
 
 ---
 
+## Team Compliance
+
+*Document compliance requirements that apply to this team's work. This helps AI ensure recommendations are compliant.*
+
+- **Compliance Checklist**:
+  - [e.g., PCI-DSS for payment handling]
+  - [e.g., WCAG 2.1 AA for accessibility]
+  - [e.g., Privacy by design for new features]
+  - [e.g., Claims handling code for customer communications]
+
+- **Last Compliance Review**: [e.g., 2024-09-15]
+
+### Open Findings Assigned to Team
+
+| Finding ID | Description | Due Date | Status |
+|------------|-------------|----------|--------|
+| [AF-2024-012] | [Incomplete audit trail for claim decisions] | [2025-02-28] | [in_progress] |
+
+- **Evidence Requirements**:
+  - [e.g., Access logs retained for 2 years]
+  - [e.g., Change records for all production deployments]
+  - [e.g., User consent records for data processing]
+
+---
+
+## Team Risk Exposure
+
+*Document risks related to services this team owns. This helps AI understand operational risk context.*
+
+### Service Risks
+
+| Service | Risk | Impact | Mitigations |
+|---------|------|--------|-------------|
+| [lodgement-api] | [High traffic causing timeouts] | [major] | [Auto-scaling, circuit breaker, fallback queue] |
+| [upload-service] | [Storage quota exceeded] | [moderate] | [Monitoring alerts, automated cleanup] |
+
+### SLA Exposure
+
+- **SLA Target**: [e.g., 99.9% uptime]
+- **Current Performance**: [e.g., 99.7%]
+- **Recent Breaches**: [e.g., 2024-11-15: 4-hour outage due to upstream dependency]
+- **Financial Exposure**: [e.g., $50k penalty per 0.1% below target]
+
+### Known Vulnerabilities
+
+| System | Vulnerability | Severity | Remediation Plan |
+|--------|---------------|----------|------------------|
+| [Legacy upload service] | [Outdated dependencies (CVE-2024-xxxx)] | [high] | [Scheduled for Q1 2025 upgrade] |
+
+---
+
+## Third-Party Dependencies
+
+*Document vendors this team depends on. This helps AI understand external dependencies and fallback options.*
+
+### Team Vendor Dependencies
+
+| Vendor | Service | Criticality | SLA | Support Contact |
+|--------|---------|-------------|-----|-----------------|
+| [Verisk] | [Repair estimating API] | [critical] | [99.5% uptime] | [support@verisk.com] |
+| [Twilio] | [SMS notifications] | [medium] | [99.95% uptime] | [support@twilio.com] |
+
+### Fallback Options
+
+| Vendor | Fallback Approach |
+|--------|-------------------|
+| [Verisk] | [Manual estimation by assessors; 2-hour delay expected] |
+| [Twilio] | [Email fallback; customer preference required] |
+
+---
+
 ## Target Users
 
 - **Primary Users**: [e.g., Policyholders lodging home and motor claims (B2C)]

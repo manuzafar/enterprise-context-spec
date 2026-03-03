@@ -237,6 +237,75 @@ owner: "motor-claims-pm@protectorinsurance.com"
 
 ---
 
+## Team Compliance
+
+- **Compliance Checklist**:
+  - General Insurance Code of Practice (claims timeframes)
+  - Privacy Act (medical information handling)
+  - Audit trail for all automated decisions
+  - Customer communication standards
+
+- **Last Compliance Review**: 2024-11-15
+
+**Open Findings Assigned to Team**:
+
+| Finding ID | Description | Due Date | Status |
+|------------|-------------|----------|--------|
+| AF-2024-018 | Audit trail incomplete for automated triage decisions | 2025-03-31 | in_progress |
+
+- **Evidence Requirements**:
+  - Decision logs for all automated claims processing
+  - Customer communication records (90-day retention)
+  - Fraud flag justifications
+  - Assessor assignment audit trail
+
+---
+
+## Risk Exposure
+
+### Service Risks
+
+| Service | Risk | Impact | Mitigations |
+|---------|------|--------|-------------|
+| Motor Claim API | High traffic during CAT events | major | Auto-scaling, circuit breaker, queue buffering |
+| Tractable Integration | AI model accuracy degradation | moderate | Fallback to human assessor, model monitoring |
+| Damage Assessment | Latency spikes affecting STP | minor | Async processing, customer notification |
+
+### SLA Exposure
+
+- **SLA Target**: 99.9% uptime for Motor Claim API
+- **Current Performance**: 99.7%
+- **Recent Breaches**: 2024-12-01 (2-hour outage during CAT surge)
+- **Financial Exposure**: Reputational impact; no direct financial penalties
+
+### Known Vulnerabilities
+
+| System | Vulnerability | Severity | Remediation Plan |
+|--------|---------------|----------|------------------|
+| Legacy integration layer | Outdated TLS configuration | medium | Upgrade scheduled Q2 2025 |
+
+---
+
+## Third-Party Dependencies
+
+### Team Vendor Dependencies
+
+| Vendor | Service | Criticality | SLA | Support Contact |
+|--------|---------|-------------|-----|-----------------|
+| Tractable | AI damage assessment | high | 99.5% uptime | support@tractable.ai |
+| Repairer Network | Motor repairs | critical | Various by repairer | repairer-support@protector.com |
+| Parts Suppliers | Parts pricing | medium | 99% uptime | parts-api@suppliers.com |
+
+### Fallback Options
+
+| Vendor | Fallback Approach |
+|--------|-------------------|
+| Tractable | Route to human assessor; 24-hour delay expected |
+| Repairer Network | Manual repairer selection by claims handler |
+| Parts Suppliers | Use standard labour rates; customer notification of delay |
+
+---
+
 ## Users
 
 - **Primary**: Policyholders with motor claims (individual customers)

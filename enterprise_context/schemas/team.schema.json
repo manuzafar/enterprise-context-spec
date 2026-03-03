@@ -398,6 +398,180 @@
         }
       }
     },
+    "compliance": {
+      "type": "object",
+      "description": "Team-level compliance requirements (GRC)",
+      "properties": {
+        "compliance_checklist": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Compliance requirements this team must follow (e.g., PCI-DSS for payment handling)"
+        },
+        "last_compliance_review": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of last compliance review"
+        },
+        "open_findings": {
+          "type": "array",
+          "description": "Audit findings assigned to this team",
+          "items": {
+            "type": "object",
+            "properties": {
+              "finding_id": {
+                "type": "string",
+                "description": "Finding identifier"
+              },
+              "description": {
+                "type": "string",
+                "description": "Finding description"
+              },
+              "due_date": {
+                "type": "string",
+                "format": "date",
+                "description": "Remediation due date"
+              },
+              "status": {
+                "type": "string",
+                "enum": ["open", "in_progress", "pending_validation"],
+                "description": "Remediation status"
+              }
+            }
+          }
+        },
+        "evidence_requirements": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Evidence this team must maintain for audits (e.g., access logs, change records)"
+        }
+      }
+    },
+    "risk_exposure": {
+      "type": "object",
+      "description": "Team-level risk exposure (GRC)",
+      "properties": {
+        "service_risks": {
+          "type": "array",
+          "description": "Risks related to services this team owns",
+          "items": {
+            "type": "object",
+            "properties": {
+              "service": {
+                "type": "string",
+                "description": "Service name"
+              },
+              "risk": {
+                "type": "string",
+                "description": "Risk description"
+              },
+              "impact": {
+                "type": "string",
+                "enum": ["minor", "moderate", "major", "catastrophic"],
+                "description": "Impact if risk materializes"
+              },
+              "mitigations": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Current mitigations in place"
+              }
+            }
+          }
+        },
+        "sla_exposure": {
+          "type": "object",
+          "description": "SLA-related risks",
+          "properties": {
+            "sla_target": {
+              "type": "string",
+              "description": "Target SLA (e.g., 99.9% uptime)"
+            },
+            "current_performance": {
+              "type": "string",
+              "description": "Current SLA performance"
+            },
+            "breach_history": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Recent SLA breaches"
+            },
+            "financial_exposure": {
+              "type": "string",
+              "description": "Financial impact of SLA breach"
+            }
+          }
+        },
+        "known_vulnerabilities": {
+          "type": "array",
+          "description": "Known security vulnerabilities in team's systems",
+          "items": {
+            "type": "object",
+            "properties": {
+              "system": {
+                "type": "string",
+                "description": "Affected system"
+              },
+              "vulnerability": {
+                "type": "string",
+                "description": "Vulnerability description"
+              },
+              "severity": {
+                "type": "string",
+                "enum": ["critical", "high", "medium", "low"],
+                "description": "Severity level"
+              },
+              "remediation_plan": {
+                "type": "string",
+                "description": "Plan to address vulnerability"
+              }
+            }
+          }
+        }
+      }
+    },
+    "third_party_dependencies": {
+      "type": "object",
+      "description": "Team's third-party vendor dependencies (GRC)",
+      "properties": {
+        "vendors": {
+          "type": "array",
+          "description": "Vendors this team depends on",
+          "items": {
+            "type": "object",
+            "properties": {
+              "vendor": {
+                "type": "string",
+                "description": "Vendor name"
+              },
+              "service": {
+                "type": "string",
+                "description": "Service used"
+              },
+              "criticality": {
+                "type": "string",
+                "enum": ["critical", "high", "medium", "low"],
+                "description": "How critical to team operations"
+              },
+              "sla": {
+                "type": "string",
+                "description": "Vendor SLA"
+              },
+              "support_contact": {
+                "type": "string",
+                "description": "Vendor support contact"
+              }
+            }
+          }
+        },
+        "fallback_options": {
+          "type": "object",
+          "description": "Fallback plans if vendors fail",
+          "additionalProperties": {
+            "type": "string",
+            "description": "Fallback approach for each critical vendor"
+          }
+        }
+      }
+    },
     "users": {
       "type": "object",
       "properties": {

@@ -222,7 +222,7 @@ owner: "james.wong@acmecorp.com"
 
 ---
 
-## Division Regulatory
+## Division Regulatory & Compliance
 
 - **Additional Frameworks**:
   - Consumer protection regulations
@@ -243,6 +243,65 @@ owner: "james.wong@acmecorp.com"
   - Regulatory complaint resolution timeframes
   - Response time SLAs
   - Vulnerable customer identification and support
+
+### Compliance Status
+
+- **Next Audit Date**: 2025-05-20
+- **Compliance Contacts**: ops-compliance@acmecorp.com
+
+**Open Audit Findings**:
+
+| Finding ID | Severity | Description | Due Date | Owner | Status |
+|------------|----------|-------------|----------|-------|--------|
+| AF-2024-031 | high | Incomplete audit trail for automated case decisions | 2025-04-15 | Platform Lead | in_progress |
+| AF-2024-045 | medium | Voice recording consent gaps | 2025-06-30 | Contact Centre Lead | open |
+| AF-2024-048 | low | Document retention policy enforcement gaps | 2025-07-31 | Data Steward | open |
+
+---
+
+## Risk Management
+
+- **Risk Owner**: James Wong, Head of Operations
+
+### Division Risks
+
+| Risk ID | Category | Description | Likelihood | Impact | Owner | Controls |
+|---------|----------|-------------|------------|--------|-------|----------|
+| DR-001 | operational | Case processing delays during peak | likely | moderate | Operations Lead | Capacity planning, contractor surge |
+| DR-002 | technology | Core banking platform outage | unlikely | catastrophic | Platform Lead | Failover, manual backup processes |
+| DR-003 | compliance | Breach of complaint handling timeframes | possible | major | Compliance Manager | Automated alerts, escalation |
+| DR-004 | operational | Fraud through digital channels | likely | moderate | Fraud Team Lead | ML detection, rule updates |
+| DR-005 | technology | Payment gateway failure | unlikely | major | Payments Lead | Multi-provider fallback |
+
+### Key Risk Indicators (KRIs)
+
+| Indicator | Threshold | Current | Status |
+|-----------|-----------|---------|--------|
+| Case backlog > 3 days | > 1,000 cases | 650 cases | green |
+| Staff utilisation | > 95% | 88% | green |
+| Core banking availability | < 99.9% | 99.95% | green |
+| Complaint response time | > 21 days avg | 15 days | green |
+| Fraud loss rate | > 0.5% of transactions | 0.28% | green |
+| SLA breach rate | > 5% | 3.2% | amber |
+
+---
+
+## Third-Party Risk
+
+### Critical Vendors
+
+| Vendor | Service | Criticality | Contract Owner | Contract End | SLA Performance |
+|--------|---------|-------------|----------------|--------------|-----------------|
+| Actimize | Fraud detection | high | Fraud Team Lead | 2026-09-30 | 99.8% uptime |
+| Pega | Workflow automation | high | Platform Lead | 2027-03-31 | 99.7% uptime |
+| NICE | Contact centre platform | medium | Contact Centre Lead | 2025-12-31 | 99.5% uptime |
+| Twilio | SMS notifications | medium | Digital Lead | 2025-09-30 | 99.9% uptime |
+
+### Active Vendor Issues
+
+| Vendor | Issue | Severity | Status |
+|--------|-------|----------|--------|
+| NICE | Integration latency spikes during peak | medium | in_progress |
 
 ---
 

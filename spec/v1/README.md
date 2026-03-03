@@ -99,8 +99,9 @@ strategic_priorities:
 | **Business Capabilities** | capability map with maturity and investment priority | Enterprise Architecture | What capabilities exist and their investment focus |
 | **Technology** | core_systems, cloud, platforms, integration_approach, tech_debt | — | How you build |
 | **Data Architecture** | golden_sources, data_domains, data_governance, data_platform | Enterprise Architecture | Where data lives and who owns it |
-| **Regulatory** | regulators, frameworks, compliance_stance, data_sensitivity, data_residency | — | How you comply |
-| **Risk Appetite** | technology, market, regulatory, innovation, operational risk levels | Organisational Design | How bold to be in recommendations |
+| **Regulatory** | regulators, frameworks, compliance_stance, data_sensitivity, data_residency, compliance (officers, audits, certifications) | GRC | How you comply |
+| **Risk Management** | framework, risk_appetite, enterprise_risks, risk_committee, risk_reporting | GRC | Enterprise risk management |
+| **Third-Party Risk** | vendor_policy, assessment_framework, critical_vendors, concentration_limits, exit_requirements | GRC | Vendor risk management |
 | **Funding Model** | type, budget_cycle, capex_opex, approval_thresholds | Organisational Design | How initiatives get funded |
 | **Change Capacity** | initiatives_in_flight, change_fatigue, adoption_support, blackout_periods | Organisational Design | Capacity for change |
 | **Organization** | sponsors, product_leadership, delivery_model, decision_forums, gate_approvers | — | How you decide |
@@ -121,7 +122,9 @@ strategic_priorities:
 | **Technology** | division_systems, integrations, tech_stack | — | Division tech |
 | **Data Ownership** | data domains owned vs consumed, stewards, sensitivity | Enterprise Architecture | Data governance |
 | **Architecture Decisions** | ADRs with context, decision, consequences | Enterprise Architecture | Key decisions that constrain work |
-| **Regulatory** | additional_frameworks, data_sensitivity, compliance_requirements | — | Division compliance |
+| **Regulatory** | additional_frameworks, data_sensitivity, compliance_requirements, compliance (audit_findings, next_audit, contacts) | GRC | Division compliance |
+| **Risk Management** | division_risks, key_risk_indicators, risk_owner | GRC | Division-level risks |
+| **Third-Party Risk** | critical_vendors, vendor_issues | GRC | Division vendor dependencies |
 | **Stakeholders** | executive_sponsor, decision_forum, gate_approver, key_stakeholders | — | Division governance |
 | **Metrics** | division KPIs with current and target values | — | Division performance |
 
@@ -139,6 +142,9 @@ strategic_priorities:
 | **Definition of Done** | story, feature, release level criteria, quality gates | Organisational Design | What "done" means |
 | **Stakeholders** | immediate_stakeholders, impacted_teams | — | Who's involved |
 | **Success Metrics Ownership** | metrics owned vs influenced, measurement | Organisational Design | Accountability |
+| **Compliance** | compliance_checklist, last_review, open_findings, evidence_requirements | GRC | Team compliance requirements |
+| **Risk Exposure** | service_risks, sla_exposure, known_vulnerabilities | GRC | Team operational risks |
+| **Third-Party Dependencies** | vendors, fallback_options | GRC | Team vendor dependencies |
 | **Users** | primary, secondary users, sophistication, pain_points | — | Who you serve |
 
 ## Framework Sources
@@ -168,11 +174,16 @@ This specification incorporates concepts from four key frameworks:
 
 ### Organisational Design
 
-- **Risk Appetite**: how bold to be across dimensions
 - **Funding Model**: how initiatives get funded
 - **Change Capacity**: ability to absorb change
 - **Definition of Done**: quality criteria
 - **Success Metrics Ownership**: accountability for metrics
+
+### GRC (Governance, Risk, Compliance)
+
+- **Compliance Program**: compliance officers, audit schedules, certifications, regulatory reporting
+- **Risk Management**: risk framework, enterprise risks, risk appetite, key risk indicators
+- **Third-Party Risk**: vendor policy, critical vendors, concentration limits, exit requirements
 
 ## Validation
 
@@ -219,3 +230,6 @@ Each new section provides context that improves AI agent outputs:
 | **Domain Events** | Supports event-driven architecture |
 | **Definition of Done** | Writes appropriate acceptance criteria |
 | **Success Metrics Ownership** | Writes metrics teams can actually own |
+| **Compliance** | Ensures recommendations meet compliance requirements; aware of open findings |
+| **Risk Management** | Calibrates recommendations to risk tolerance; avoids known risks |
+| **Third-Party Risk** | Uses approved vendors; knows vendor SLAs; suggests fallbacks when needed |

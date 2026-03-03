@@ -383,11 +383,12 @@
     },
     "regulatory": {
       "type": "object",
+      "description": "Division-level regulatory and compliance requirements",
       "properties": {
         "additional_frameworks": {
           "type": "array",
           "items": { "type": "string" },
-          "description": "Division-specific regulatory frameworks"
+          "description": "Division-specific regulatory frameworks (extends company frameworks)"
         },
         "data_sensitivity": {
           "type": "array",
@@ -398,6 +399,203 @@
           "type": "array",
           "items": { "type": "string" },
           "description": "Specific compliance requirements"
+        },
+        "compliance": {
+          "type": "object",
+          "description": "Division compliance status (GRC)",
+          "properties": {
+            "audit_findings": {
+              "type": "array",
+              "description": "Open audit findings for this division",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "finding_id": {
+                    "type": "string",
+                    "description": "Finding identifier"
+                  },
+                  "severity": {
+                    "type": "string",
+                    "enum": ["critical", "high", "medium", "low"],
+                    "description": "Finding severity"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Finding description"
+                  },
+                  "due_date": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Remediation due date"
+                  },
+                  "owner": {
+                    "type": "string",
+                    "description": "Person responsible for remediation"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": ["open", "in_progress", "pending_validation", "closed"],
+                    "description": "Remediation status"
+                  }
+                }
+              }
+            },
+            "next_audit_date": {
+              "type": "string",
+              "format": "date",
+              "description": "Next scheduled audit date"
+            },
+            "compliance_contacts": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Division compliance contacts"
+            }
+          }
+        }
+      }
+    },
+    "risk_management": {
+      "type": "object",
+      "description": "Division-level risk management (GRC)",
+      "properties": {
+        "division_risks": {
+          "type": "array",
+          "description": "Risks owned by this division",
+          "items": {
+            "type": "object",
+            "properties": {
+              "risk_id": {
+                "type": "string",
+                "description": "Risk identifier (e.g., DR-001)"
+              },
+              "category": {
+                "type": "string",
+                "enum": ["strategic", "operational", "financial", "compliance", "technology", "reputational"],
+                "description": "Risk category"
+              },
+              "description": {
+                "type": "string",
+                "description": "Risk description"
+              },
+              "likelihood": {
+                "type": "string",
+                "enum": ["rare", "unlikely", "possible", "likely", "almost_certain"],
+                "description": "Probability of occurrence"
+              },
+              "impact": {
+                "type": "string",
+                "enum": ["insignificant", "minor", "moderate", "major", "catastrophic"],
+                "description": "Impact if realized"
+              },
+              "owner": {
+                "type": "string",
+                "description": "Risk owner"
+              },
+              "controls": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Key controls mitigating this risk"
+              }
+            }
+          }
+        },
+        "key_risk_indicators": {
+          "type": "array",
+          "description": "KRIs monitored by this division",
+          "items": {
+            "type": "object",
+            "properties": {
+              "indicator": {
+                "type": "string",
+                "description": "KRI name"
+              },
+              "threshold": {
+                "type": "string",
+                "description": "Threshold that triggers escalation"
+              },
+              "current_value": {
+                "type": "string",
+                "description": "Current value"
+              },
+              "status": {
+                "type": "string",
+                "enum": ["green", "amber", "red"],
+                "description": "Current status"
+              }
+            }
+          }
+        },
+        "risk_owner": {
+          "type": "string",
+          "description": "Division risk owner (typically division head or delegate)"
+        }
+      }
+    },
+    "third_party_risk": {
+      "type": "object",
+      "description": "Division vendor relationships and risks (GRC)",
+      "properties": {
+        "critical_vendors": {
+          "type": "array",
+          "description": "Vendors critical to this division",
+          "items": {
+            "type": "object",
+            "properties": {
+              "vendor": {
+                "type": "string",
+                "description": "Vendor name"
+              },
+              "service": {
+                "type": "string",
+                "description": "Service provided"
+              },
+              "criticality": {
+                "type": "string",
+                "enum": ["critical", "high", "medium", "low"],
+                "description": "Business criticality"
+              },
+              "contract_owner": {
+                "type": "string",
+                "description": "Person managing vendor relationship"
+              },
+              "contract_end": {
+                "type": "string",
+                "format": "date",
+                "description": "Contract end date"
+              },
+              "sla_performance": {
+                "type": "string",
+                "description": "Current SLA performance (e.g., 99.8% uptime)"
+              }
+            }
+          }
+        },
+        "vendor_issues": {
+          "type": "array",
+          "description": "Active vendor issues or concerns",
+          "items": {
+            "type": "object",
+            "properties": {
+              "vendor": {
+                "type": "string",
+                "description": "Vendor name"
+              },
+              "issue": {
+                "type": "string",
+                "description": "Issue description"
+              },
+              "severity": {
+                "type": "string",
+                "enum": ["critical", "high", "medium", "low"],
+                "description": "Issue severity"
+              },
+              "status": {
+                "type": "string",
+                "enum": ["open", "in_progress", "resolved"],
+                "description": "Issue status"
+              }
+            }
+          }
         }
       }
     },

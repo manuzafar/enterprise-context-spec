@@ -91,9 +91,38 @@ owner: "strategy@protectorinsurance.com"
 - **Data Sensitivity**: PII (policyholder details), medical information (injury claims), financial data (payment details), vehicle/property data
 - **Data Residency**: Local data centres for policyholder data, cloud processing permitted with appropriate controls
 
+### Compliance Program
+
+- **Compliance Officers**:
+  - Chief Compliance Officer (CCO) - Sarah Chen
+  - Data Protection Officer (DPO) - Michael Torres
+  - Claims Compliance Manager - Jennifer Walsh
+
+- **Audit Schedule**:
+  - External: Annual SOC 2 Type II, Biennial ISO 27001 recertification
+  - Internal: Quarterly compliance reviews, Annual control testing
+  - Regulatory: APRA tripartite reviews as scheduled
+
+- **Last External Audit**: 2024-09-15
+
+- **Active Certifications**:
+  - ISO 27001:2022 (expires 2026-05-20)
+  - SOC 2 Type II (annual attestation)
+
+- **Regulatory Reporting**:
+  - Insurance Regulatory Authority quarterly returns
+  - Financial Services Commission annual report
+  - Breach notification within 72 hours
+
 ---
 
-## Risk Appetite
+## Risk Management
+
+- **Risk Framework**: COSO ERM with insurance-specific extensions
+- **Risk Committee**: Board Risk Committee (quarterly), Executive Risk Committee (monthly)
+- **Risk Reporting**: Monthly to ExCo, Quarterly to Board Risk Committee
+
+### Risk Appetite
 
 | Dimension | Appetite | Description |
 |-----------|----------|-------------|
@@ -102,6 +131,47 @@ owner: "strategy@protectorinsurance.com"
 | Regulatory | moderate | Proactive engagement, seek clarity before acting in grey areas |
 | Innovation | progressive | Strong investment in AI/ML, willing to experiment with claims automation |
 | Operational | moderate | Accept measured disruption for efficiency gains, careful change management |
+
+### Enterprise Risks
+
+| Risk ID | Category | Description | Likelihood | Impact | Owner | Treatment |
+|---------|----------|-------------|------------|--------|-------|-----------|
+| R-001 | operational | Catastrophe claims surge overwhelming capacity | likely | major | Chief Claims Officer | mitigate |
+| R-002 | technology | Core Guidewire system outage | unlikely | catastrophic | CTO | mitigate |
+| R-003 | compliance | Regulatory breach on claims handling timeframes | possible | major | CCO | mitigate |
+| R-004 | financial | Adverse claims development on motor book | possible | moderate | Chief Actuary | accept |
+| R-005 | reputational | Social media amplification of claims dispute | possible | moderate | Chief Marketing Officer | mitigate |
+
+---
+
+## Third-Party Risk Management
+
+- **Vendor Policy**: All critical vendors require annual security assessment
+- **Assessment Framework**: SIG (Standardized Information Gathering)
+- **Vendor Audit Schedule**: Critical: annual, High: biennial, Medium: triennial
+
+### Critical Vendors
+
+| Vendor | Service | Criticality | Data Access | Last Assessment | Contract End |
+|--------|---------|-------------|-------------|-----------------|--------------|
+| Guidewire | Core insurance platform | critical | All policy and claims data | 2024-06-15 | 2027-12-31 |
+| AWS | Cloud infrastructure | critical | All data (encrypted) | 2024-03-01 | 2026-12-31 |
+| Verisk | Vehicle estimating | high | Vehicle details, claim data | 2024-08-20 | 2025-12-31 |
+| Friss | Fraud detection | high | Claims data | 2024-04-10 | 2026-06-30 |
+| Salesforce | Commercial CRM | high | Commercial customer PII | 2024-07-15 | 2025-09-30 |
+
+### Concentration Limits
+
+| Category | Limit | Current |
+|----------|-------|---------|
+| Single cloud provider | 85% of infrastructure | 82% (AWS) |
+| Core system vendor | Acceptable concentration | Guidewire only |
+
+### Exit Requirements
+
+- All critical vendors must have 12-month exit clause
+- Data portability required in all contracts
+- Escrow for Guidewire customisation code
 
 ---
 

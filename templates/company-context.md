@@ -96,11 +96,42 @@ This document provides company-wide context for AI agents. It should be updated 
 - **Data Sensitivity**: [e.g., PII (name, address, DOB), financial data, medical records, claims history]
 - **Data Residency**: [e.g., Australian data centres only, no offshore processing of PII]
 
+### Compliance Program
+
+*Document your compliance program structure. This helps AI understand governance and escalation paths.*
+
+- **Compliance Officers**:
+  - [e.g., Chief Compliance Officer (CCO) - overall compliance program]
+  - [e.g., Data Protection Officer (DPO) - privacy compliance]
+  - [e.g., Money Laundering Reporting Officer (MLRO) - AML compliance]
+
+- **Audit Schedule**:
+  - [e.g., External: Annual SOC 2 Type II, Biennial ISO 27001 recertification]
+  - [e.g., Internal: Quarterly compliance reviews, Annual control testing]
+
+- **Last External Audit**: [e.g., 2024-06-15]
+
+- **Active Certifications**:
+  - [e.g., ISO 27001:2022 (expires 2026-03-15)]
+  - [e.g., SOC 2 Type II (annual)]
+  - [e.g., PCI-DSS Level 1 (annual)]
+
+- **Regulatory Reporting**:
+  - [e.g., APRA quarterly returns]
+  - [e.g., ASIC breach reporting (as required)]
+  - [e.g., Privacy breach notification (within 72 hours)]
+
 ---
 
-## Risk Appetite
+## Risk Management
 
-*Define how bold the organisation is willing to be across different dimensions. This helps AI calibrate recommendations.*
+*Define your enterprise risk management approach. This helps AI understand risk governance and calibrate recommendations.*
+
+- **Risk Framework**: [e.g., COSO, ISO 31000, NIST RMF, Custom]
+- **Risk Committee**: [e.g., Board Risk Committee, ERM Steering Committee]
+- **Risk Reporting**: [e.g., Monthly to ExCo, Quarterly to Board]
+
+### Risk Appetite
 
 | Dimension | Appetite | Description |
 |-----------|----------|-------------|
@@ -111,6 +142,52 @@ This document provides company-wide context for AI agents. It should be updated 
 | Operational | [moderate] | [Accept some disruption for meaningful improvement] |
 
 **Levels**: very_conservative → conservative → moderate → progressive → aggressive
+
+### Enterprise Risks
+
+*Top risks tracked at board level. This helps AI avoid recommending approaches that increase known risks.*
+
+| Risk ID | Category | Description | Likelihood | Impact | Owner | Treatment |
+|---------|----------|-------------|------------|--------|-------|-----------|
+| [R-001] | [technology] | [Legacy system failure] | [possible] | [major] | [CTO] | [mitigate] |
+| [R-002] | [compliance] | [Regulatory breach] | [unlikely] | [catastrophic] | [CCO] | [mitigate] |
+| [R-003] | [operational] | [Vendor concentration] | [likely] | [moderate] | [COO] | [transfer] |
+
+**Categories**: strategic, operational, financial, compliance, technology, reputational
+**Likelihood**: rare → unlikely → possible → likely → almost_certain
+**Impact**: insignificant → minor → moderate → major → catastrophic
+**Treatment**: accept, mitigate, transfer, avoid
+
+---
+
+## Third-Party Risk Management
+
+*Define your vendor/third-party risk management approach. This helps AI understand approved vendors and concentration limits.*
+
+- **Vendor Policy**: [e.g., All vendors must complete SIG questionnaire]
+- **Assessment Framework**: [e.g., SIG, CAIQ, VSAQ, Custom]
+- **Vendor Audit Schedule**: [e.g., Critical: annual, High: biennial, Medium: triennial]
+
+### Critical Vendors
+
+| Vendor | Service | Criticality | Data Access | Last Assessment | Contract End |
+|--------|---------|-------------|-------------|-----------------|--------------|
+| [AWS] | [Cloud infrastructure] | [critical] | [All data] | [2024-06-15] | [2026-12-31] |
+| [Salesforce] | [CRM] | [critical] | [Customer PII] | [2024-03-01] | [2025-12-31] |
+| [Guidewire] | [Core insurance platform] | [critical] | [Policy, claims data] | [2024-09-10] | [2027-06-30] |
+
+### Concentration Limits
+
+| Category | Limit | Current |
+|----------|-------|---------|
+| [Single cloud provider] | [80% of infrastructure] | [75%] |
+| [Single vendor per critical capability] | [Avoid] | [Compliant] |
+
+### Exit Requirements
+
+- [e.g., All critical vendors must have 12-month exit clause]
+- [e.g., Data portability required in all contracts]
+- [e.g., Escrow for critical source code]
 
 ---
 
