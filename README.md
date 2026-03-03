@@ -144,7 +144,6 @@ When you adopt a new AI tool:
 | Re-explain your organization | Load existing context files |
 | Re-describe constraints | Constraints inherited automatically |
 | Re-define terminology | Ubiquitous language available |
-| Weeks of prompt engineering | Minutes to configure |
 
 ### 5. Cross-Agent Alignment
 
